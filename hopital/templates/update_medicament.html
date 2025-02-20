@@ -1,0 +1,71 @@
+{% include "base.html" %}
+{% include "navigation.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">Modifier le Médicament</h2>
+
+    <div class="card p-4 shadow">
+        <form method="POST">
+            {% csrf_token %}
+
+            <!-- Affichage des erreurs si elles existent -->
+            {% if error_message %}
+                <div class="alert alert-danger">
+                    {{ error_message }}
+                </div>
+            {% endif %}
+
+            <!-- Affichage du message de succès -->
+            {% if success_message %}
+                <div class="alert alert-success">
+                    {{ success_message }}
+                </div>
+            {% endif %}
+
+            <!-- Champs du formulaire -->
+            <div class="mb-3">
+                <label class="form-label">Nom du Médicament</label>
+                <input type="text" class="form-control" name="nom" value="{{ medicament.nom }}">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Catégorie</label>
+                <select class="form-control" name="categorie">
+                    <option value="antibiotique" {% if medicament.categorie == "antibiotique" %}selected{% endif %}>Antibiotique</option>
+                    <option value="antalgique" {% if medicament.categorie == "antalgique" %}selected{% endif %}>Antalgique</option>
+                    <option value="anti-inflammatoire" {% if medicament.categorie == "anti-inflammatoire" %}selected{% endif %}>Anti-inflammatoire</option>
+                    <option value="vitamines" {% if medicament.categorie == "vitamines" %}selected{% endif %}>Vitamines</option>
+                    <option value="autres" {% if medicament.categorie == "autres" %}selected{% endif %}>Autres</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Quantité en Stock</label>
+                <input type="number" class="form-control" name="quantite_stock" value="{{ medicament.quantite_stock }}">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Prix Unitaire</label>
+                <input type="number" class="form-control" name="prix" value="{{ medicament.prix }}">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Date d'Expiration</label>
+                <input type="date" class="form-control" name="date_expiration" value="{{ medicament.date_expiration }}">
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Enregistrer
+                </button>
+                <a href="{% url 'view_medicament' %}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Annuler
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
+
+{% include "footer.html" %}

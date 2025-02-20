@@ -1,0 +1,75 @@
+{% include "base.html" %}
+{% include "navigation.html" %}
+
+{% block content %}
+
+{% if success %}
+<script>
+    alert("Le patient a été ajouté avec succès !");
+    window.location.href = "{% url 'view_appointment' %}";
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert('Échec de l\'ajout, veuillez réessayer.');
+</script>
+{% endif %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4><i class="fas fa-user-md"></i> Ajouter un Patient</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" class="needs-validation">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label class="form-label"><i class="fas fa-user"></i> Nom du Docteur</label>
+                            <select name="doctor" class="form-control" required>
+                                {% for doctor in doc %}
+                                <option value="{{ doctor.id }}">{{ doctor.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    
+                        <div class="mb-3">
+                            <label class="form-label"><i class="fas fa-user"></i> Nom du Patient</label>
+                            <select name="patient" class="form-control" required>
+                                {% for patient in pt %}
+                                <option value="{{ patient.id }}">{{ patient.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    
+                        <div class="mb-3">
+                            <label class="form-label"><i class="fas fa-calendar"></i> Date</label>
+                            <input type="date" class="form-control" name="date" required>
+                        </div>
+                    
+                        <div class="mb-3">
+                            <label class="form-label"><i class="fas fa-clock"></i> Heure</label>
+                            <input type="time" class="form-control" name="time" required>
+                        </div>
+                    
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i> Enregistrer
+                            </button>
+                            <a href="{% url 'view_appointment' %}" class="btn btn-danger">
+                                <i class="fas fa-times"></i> Annuler
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% include "footer.html" %}

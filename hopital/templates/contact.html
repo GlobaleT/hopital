@@ -1,0 +1,58 @@
+{% include "base.html" %}
+{% include "navigation.html" %}
+
+
+<style>
+    .mydivstyle:hover {
+        box-shadow: 0 0 200px rgba(0, 0, 0, 0.3); 
+        transform: translateY(-20px);
+    }
+
+    
+</style>
+
+
+{% block content %}
+
+
+<div class="container text-center" style="margin-top:20px">
+    <h1 class="text-center">Contactez-nous</h1>
+    
+    <div class="row align-items-end mt-5">
+        <div class="col-lg-3 col-sm-6 mydivstyle ">
+            <h4 class=""><i class="fas fa-phone"></i> Contact</h4>
+            <p class="text-danger font-weight-bold mt-3">
+                <a href="tel:+221771667996" style="text-decoration: none; color: red;">+221 77 166 79 96</a>
+            </p>
+        </div>
+        <div class="col-lg-3 col-sm-6 mydivstyle ">
+            <h4 class=""><i class="fas fa-envelope"></i> Envoyer un email</h4>
+            <p class="text-danger font-weight-bold mt-3">
+                <a href="mailto:gbabou55@gmail.com" style="text-decoration: none; color: red;">gbabou55@gmail.com</a>
+            </p>
+        </div>
+   
+        <div class="col-lg-3 col-sm-6 mydivstyle ">
+            <h4><i class="fas fa-map-marker-alt"></i> Adresse du bureau</h4>
+            <p class="text-danger font width hold mt-3">
+                <a href="https://www.google.com/maps/search/?api=1&query=Keur+Gaye+Yacine,+Taiba+Niassene" 
+                   target="_blank" 
+                   style="text-decoration: none; color: red;">
+                    📍 Keur Gaye Yacine, Taïba Niassène
+                </a>
+            </p>
+        </div>
+        
+        
+        <div class="col-lg-3 col-sm-6 mydivstyle ">
+            <h4><i class="fas fa-clock"></i> Heures d'ouverture</h4>
+            <p class="text-danger font width hold mt-3" >
+                🕒 Lundi - Dimanche : 08h00-18h00 <br>
+                
+            </p>
+        </div>
+        
+</div>
+
+{% endblock content %}
+{% include "footer.html" %}

@@ -1,0 +1,112 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="{% url 'home' %}">
+            <i class="fas fa-hospital"></i> Hopital
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'home' %}">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'contact' %}">
+                        <i class="fas fa-envelope"></i> Contact
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}">
+                        <i class="fas fa-info-circle"></i> About
+                    </a>
+                </li>
+
+                {% if request.user.is_staff %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'dashboard' %}">
+                        <i class="fas fa-chart-line"></i> Dashboard
+                    </a>
+                </li>
+
+                <!-- Menu déroulant : Doctor -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-user-md"></i> Doctor
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'view_doctor' %}">Voir Docteurs</a></li>
+                        <li><a class="dropdown-item" href="{% url 'add_doctor' %}">Ajouter Docteur</a></li>
+                    </ul>
+                </li>
+
+                <!-- Menu déroulant : Patient -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-user-injured"></i> Patient
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'view_patient' %}">Voir Patients</a></li>
+                        <li><a class="dropdown-item" href="{% url 'add_patient' %}">Ajouter Patient</a></li>
+                    </ul>
+                </li>
+
+                <!-- Menu déroulant : Rendez-vous -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-calendar-check"></i> Rendez-vous
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'view_appointment' %}">Voir Rendez-vous</a></li>
+                        <li><a class="dropdown-item" href="{% url 'add_appointment' %}">Ajouter Rendez-vous</a></li>
+                    </ul>
+                </li>
+
+                <!-- Menu déroulant : Pharmacie -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-pills"></i> Pharmacie
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'view_medicament' %}">Voir Médicaments</a></li>
+                        <li><a class="dropdown-item" href="{% url 'add_medicament' %}">Ajouter Médicament</a></li>
+                    </ul>
+                </li>
+
+                <!-- Menu déroulant : Facture -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-file-invoice-dollar"></i> Facture
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'add_facture' %}">Ajouter Facture</a></li>
+                    </ul>
+                </li>
+
+                <!-- Bouton Logout -->
+                <li class="nav-item">
+                    <a class="nav-link btn btn-danger text-white px-3 py-1 ms-2" href="{% url 'logout_admin' %}">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </li>
+
+                {% else %}
+                <!-- Bouton Login -->
+                <li class="nav-item">
+                    <a class="nav-link btn btn-success text-white px-3 py-1 ms-2" href="{% url 'admin_login' %}">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Ajout de FontAwesome pour les icônes -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">

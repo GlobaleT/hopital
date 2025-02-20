@@ -1,0 +1,47 @@
+{% include "base.html" %}
+{% include "navigation.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Liste des Docteurs</h2>
+
+    <div class="table-responsive">
+        <table  id="example" class="table table-striped table-bordered table-hover text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nom Complet</th>
+                    <th>Mobile</th>
+                    <th>Spécialité</th>
+                    <th>Adresse</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in doc %}
+                <tr>
+                    <td><strong>{{ i.id }}</strong></td>
+                    <td>{{ i.name }}</td>
+                    <td>{{ i.mobile }}</td>
+                    <td>{{ i.specialite }}</td>
+                    <td>{{ i.adresse }}</td>
+                    <td>
+                        <a href="{% url 'delete_doctor' i.id %}" 
+                           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce docteur ?');" 
+                           class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash"></i> Supprimer
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center text-muted">Aucun docteur trouvé</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}
+
+{% include "footer.html" %}

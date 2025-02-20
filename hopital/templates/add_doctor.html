@@ -1,0 +1,72 @@
+{% include "base.html" %}
+{% include "navigation.html" %}
+
+{% block content %}
+
+{% if success %}
+<script>
+    alert("Le docteur a été ajouté avec succès !");
+    window.location.href = "{% url 'view_doctor' %}";
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert('Échec de l\'ajout, veuillez réessayer.');
+</script>
+{% endif %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4><i class="fas fa-user-md"></i> Ajouter un Docteur</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label class="form-label"><i class="fas fa-user"></i> Nom du Docteur</label>
+                            <input type="text" class="form-control" name="name" placeholder="Ex: Dr. Jean Dupont" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label"><i class="fas fa-phone"></i> Téléphone</label>
+                            <input type="text" class="form-control" name="mobile" placeholder="+221 77 123 45 67" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label"><i class="fas fa-envelope"></i> Email</label>
+                            <input type="email" class="form-control" name="email" placeholder="exemple@email.com" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label"><i class="fas fa-map-marker-alt"></i> Adresse</label>
+                            <input type="text" class="form-control" name="adresse" placeholder="Rue, Ville, Pays" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label"><i class="fas fa-stethoscope"></i> Spécialité</label>
+                            <input type="text" class="form-control" name="specialite" placeholder="Ex: Cardiologue" required>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i> Enregistrer
+                            </button>
+                            <a href="{% url 'view_doctor' %}" class="btn btn-danger">
+                                <i class="fas fa-times"></i> Annuler
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% include "footer.html" %}

@@ -1,0 +1,39 @@
+{% include "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="text-center">Facture</h2>
+
+    <p><strong>Patient :</strong> {{ facture.patient.nom }} {{ facture.patient.prenom }}</p>
+    <p><strong>Âge :</strong> {{ facture.patient.age }}</p>
+    <p><strong>Adresse :</strong> {{ facture.patient.adresse }}</p>
+    <p><strong>Date :</strong> {{ facture.date_facture }}</p>
+
+    <h4>Médicaments achetés :</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Quantité</th>
+                <th>Prix Unitaire</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in facture.facturemedicament_set.all %}
+            <tr>
+                <td>{{ item.medicament.nom }}</td>
+                <td>{{ item.quantite }}</td>
+                <td>{{ item.medicament.prix }}€</td>
+                <td>{{ item.medicament.prix|floatformat:2 }}€</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Total à payer : {{ facture.total }}€</h3>
+
+    <a href="{% url 'dashboard' %}" class="btn btn-success">Retour au tableau de bord</a>
+</div>
+
+{% endblock %}

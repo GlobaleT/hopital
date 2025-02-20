@@ -1,0 +1,76 @@
+{% include "base.html" %}
+{% include "navigation.html" %}
+
+{% block content %}
+
+{% if success %}
+<script>
+    alert("Le patient a été ajouté avec succès !");
+    window.location.href = "{% url 'view_patient' %}";
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert('Échec de l\'ajout, veuillez réessayer.');
+</script>
+{% endif %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4><i class="fas fa-user-md"></i> Ajouter un Patient</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" class="needs-validation">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label class="form-label"><i class="fas fa-user"></i> Nom du Patient</label>
+                            <input type="text" class="form-control" name="name" placeholder="Ex: Jean Dupont" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label"><i class="fas fa-phone"></i> Téléphone</label>
+                            <input type="text" class="form-control" name="mobile" placeholder="+221 77 123 45 67" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label"><i class="fas fa-venus-mars"></i> Genre</label>
+                            <select class="form-control" name="gender" required>
+                                <option value="M">Masculin</option>
+                                <option value="F">Féminin</option>
+                                <option value="Autre">Autre</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label"><i class="fas fa-map-marker-alt"></i> Adresse</label>
+                            <input type="text" class="form-control" name="adresse" placeholder="Rue, Ville,Pays" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label"><i class="fas fa-birthday-cake"></i> Date de naissance</label>
+                            <input type="date" class="form-control" name="date_naissance" required>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i> Enregistrer
+                            </button>
+                            <a href="{% url 'view_patient' %}" class="btn btn-danger">
+                                <i class="fas fa-times"></i> Annuler
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% include "footer.html" %}

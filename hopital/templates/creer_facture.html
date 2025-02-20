@@ -1,0 +1,39 @@
+{% include "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="text-center">Créer une Facture</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        <p><strong>Patient :</strong> {{ patient.nom }} {{ patient.prenom }}</p>
+        <p><strong>Âge :</strong> {{ patient.age }}</p>
+        <p><strong>Adresse :</strong> {{ patient.adresse }}</p>
+
+        <h4>Médicaments disponibles :</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th>Quantité</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for medicament in medicaments %}
+                <tr>
+                    <td>{{ medicament.nom }}</td>
+                    <td>{{ medicament.prix }}€</td>
+                    <td>
+                        <input type="number" name="medicament_{{ medicament.id }}" value="0" min="0" max="{{ medicament.quantite_stock }}">
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <button type="submit" class="btn btn-primary">Créer Facture</button>
+    </form>
+</div>
+
+{% endblock %}
